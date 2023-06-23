@@ -18,8 +18,8 @@ const ThoughtSchema = new Schema(
         ],
         text: {
           type: String,
-          minLength: 15,
-          maxLength: 500,
+          minLength: 4,
+          maxLength: 150,
         },
       },
     {
