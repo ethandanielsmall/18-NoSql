@@ -1,9 +1,5 @@
 const { Schema, model } = require('mongoose');
 
-// schema is incomplete- this is just the bones. need to fill it in proper
-// maybe wait for sam to push the solved so i can see whats wrong
-// with the tags section since thats part of the student file i got this from
-// lol
 const UserSchema = new Schema({
     username: {
         type: String,
@@ -23,7 +19,8 @@ const UserSchema = new Schema({
             ref: 'friends'
         }
     ]
-},
+    },
+
     {
         toJSON: {
             virtuals: true
