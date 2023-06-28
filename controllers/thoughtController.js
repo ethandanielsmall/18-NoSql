@@ -1,8 +1,8 @@
-// ObjectId() method for converting studentId string into an ObjectId for querying database
+// ObjectId() method for converting thoughtId string into an ObjectId for querying database
 const { ObjectId } = require('mongoose').Types;
 const { Thought, Users } = require('../models');
 
-// TODO: Create an aggregate function to get the number of students overall
+// TODO: Create an aggregate function to get the number of thoughts overall
 const headCount = async () => {
   const numberOfThoughts = await Thought.countDocuments();
   return numberOfThoughts;
@@ -11,7 +11,7 @@ const headCount = async () => {
 // Execute the aggregate method on the Thought model and calculate the overall grade by using the $avg operator
 const grade = async (ThoughtId) =>
   Thought.aggregate([
-    // TODO: Ensure we include only the student who can match the given ObjectId using the $match operator
+    // TODO: Ensure we include only the thought who can match the given ObjectId using the $match operator
     {
       $match: {
         _id: ObjectId(ThoughtId),
@@ -20,7 +20,7 @@ const grade = async (ThoughtId) =>
     {
       $unwind: '$assignments',
     },
-    // TODO: Group information for the student with the given ObjectId alongside an overall grade calculated using the $avg operator
+    // TODO: Group information for the thought with the given ObjectId alongside an overall grade calculated using the $avg operator
     {
       $group: {
         _id: '$_id',
@@ -30,7 +30,7 @@ const grade = async (ThoughtId) =>
   ]);
 
 module.exports = {
-  // Get all students
+  // Get all thoughts
   async getThoughts(req, res) {
     try {
       const thoughts = await Thought.find();
@@ -44,7 +44,7 @@ module.exports = {
       return res.status(500).json(err);
     }
   },
-  // Get a single student
+  // Get a single thought
   async getSingleThought(req, res) {
     try {
       const thought = await Thought.findOne({ _id: req.params.ThoughtId })
@@ -64,7 +64,7 @@ module.exports = {
       return res.status(500).json(err);
     }
   },
-  // create a new student
+  // create a new thought
   async createThought(req, res) {
     try {
       const thought = await Thought.create(req.body);
@@ -73,7 +73,7 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-  // Delete a student and remove them from the course
+  // Delete a thought and remove them from the user
   async deleteThought(req, res) {
     try {
       const thought = await Thought.findOneAndRemove({ _id: req.params.ThoughtId });
@@ -101,7 +101,7 @@ module.exports = {
     }
   },
 
-  // Add an assignment to a student
+  // Add an assignment to a thought
   async addAssignment(req, res) {
     try {
       console.log('You are adding an assignment');

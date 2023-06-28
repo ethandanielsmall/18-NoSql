@@ -1,7 +1,7 @@
 const { User, Thought } = require('../models');
 
 module.exports = {
-  // Get all courses
+  // Get all users
   async getUser(req, res) {
     try {
       const Users = await User.find();
@@ -10,7 +10,7 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-  // Get a course
+  // Get a user
   async getSingleUser(req, res) {
     try {
       const User = await User.findOne({ _id: req.params.UserId })
@@ -25,7 +25,7 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-  // Create a course
+  // Create a user
   async createUser(req, res) {
     try {
       const User = await User.create(req.body);
@@ -35,7 +35,7 @@ module.exports = {
       return res.status(500).json(err);
     }
   },
-  // Delete a course
+  // Delete a user
   async deleteUser(req, res) {
     try {
       const User = await User.findOneAndDelete({ _id: req.params.UserId });
@@ -50,7 +50,7 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-  // Update a course
+  // Update a user
   async updateUser(req, res) {
     try {
       const User = await User.findOneAndUpdate(
