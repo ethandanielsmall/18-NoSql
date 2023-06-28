@@ -29,8 +29,6 @@ const UserSchema = new Schema({
     }
 );
 
-UserSchema.virtual('postCount').get(function () {
-return this.posts.length;
-});
+const User = model('course', UserSchema);
 
-const Reaction = model('reaction', UserSchema);
+module.exports = User;
